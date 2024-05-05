@@ -18,6 +18,19 @@ type edge = {
 }
 [@@deriving show]
 
+let string_of_token = function
+  | NonTerminal s -> "NonTerminal " ^ s
+  | Terminal s -> "Terminal " ^ s
+
+let rec show_edge edge =
+  Printf.sprintf "{Edge:\nstart=%d\nend=%d\nlhs=%s\nrhs_parsed=[%s]\nrhs_unparsed=[%s]\nhistory=[%s]}\n"
+    edge.start
+    edge.end_
+    edge.lhs
+    (List.map string_of_token edge.rhs_parsed |> String.concat ",\n")
+    (List.map string_of_token edge.rhs_unparsed |> String.concat ",\n")
+    (List.map show_edge edge.history |> String.concat ",\n")
+
 module EdgeSet = Set.Make(struct
     type t = edge
     let compare e1 e2 = compare e1 e2
