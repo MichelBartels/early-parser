@@ -1,0 +1,5 @@
+(executable
+ (public_name early)
+ (name main)
+ (libraries early)
+ (preprocess (pps ppx_deriving.show)))
