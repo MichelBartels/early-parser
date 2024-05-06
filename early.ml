@@ -1,7 +1,6 @@
 type token =
   | NonTerminal of string
   | Terminal of string
-[@@deriving show]
 
 type rule = {
   lhs: string;
@@ -16,7 +15,6 @@ type edge = {
   rhs_unparsed: token list;
   history: edge list;
 }
-[@@deriving show]
 
 let string_of_token = function
   | NonTerminal s -> "NonTerminal " ^ s
